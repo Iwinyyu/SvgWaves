@@ -1,0 +1,121 @@
+.Bottom-Bar {
+  padding: 2vh 0 2vh 2vw;
+  position: fixed;
+  height: 20vh;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  background-color: var(--Main-theme);
+  display: flex;
+  gap: 8vw;
+}
+.Canvas-W-H {
+  width: 16rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+.var-inputs {
+  color: var(--Element-main-theme);
+  font-size: 1rem;
+  padding-left: 0.2rem;
+  width: 5em;
+  background-color: var(--Secondary-main-theme);
+}
+.size:hover {
+  background-color: var(--Element-hi-light);
+}
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.W-size,
+.strokeWidth,
+.segments {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+h1 {
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+}
+
+.Variables {
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  width: 15rem;
+  color: var(--Element-main-theme);
+  font-weight: 700;
+  margin-bottom: max(2vh, 1rem);
+  appearance: none;
+}
+.Rotation {
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  width: 15rem;
+  color: var(--Element-main-theme);
+  font-weight: 700;
+  margin-bottom: max(2vh, 1rem);
+  appearance: none;
+}
+.Variable-Input {
+  appearance: none;
+  background-color: transparent;
+}
+.Variable-Input::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  background-color: var(--Element-main-theme);
+  border-radius: 4px;
+  height: 0.5rem;
+  -webkit-appearance: none;
+}
+.Variable-Input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 1rem;
+  width: 1rem;
+  margin-top: -4px;
+  background-color: var(--Element-secondary-theme);
+}
+.Variable-Input:disabled::-webkit-slider-runnable-track {
+  background-color: var(--Secondary-main-theme);
+}
+.Variable-Input:disabled::-webkit-slider-thumb {
+  background-color: var(--Secondary-main-theme);
+}
+
+.Direction-Buttons {
+  display: flex;
+  gap: 2rem;
+  width: 8rem;
+  justify-content: center;
+}
+
+.Direction-Button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.Direction-Icon {
+  width: 100%;
+  height: 100%;
+  color: var(--Element-main-theme);
+}
+.Direction-Icon:hover {
+  width: 100%;
+  height: 100%;
+  color: var(--Element-secondary-theme);
+}

@@ -1,0 +1,62 @@
+.Layer-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 7px;
+  padding: 5px 10px;
+  width: 100%;
+}
+.Layer-container:hover {
+  background-color: var(--Secondary-main-theme);
+}
+.Layer-active {
+  background-color: var(--Secondary-main-theme);
+}
+
+.cover {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.color-picker {
+  z-index: 2;
+  position: fixed;
+  translate: -110% 50%;
+}
+.color-name {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.layer-color {
+  width: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: transparent;
+  color: white;
+  height: 1rem;
+  font-size: 1rem;
+}
+
+.layer-buttons {
+  display: flex;
+  gap: 8px;
+}
+.layer-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+}
+.layer-icon {
+  height: 100%;
+  width: 100%;
+}
