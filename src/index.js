@@ -7,21 +7,24 @@ import SvgDrawing from "./functions/Svgdrawing";
 import SideBar from "./components/SideBar";
 import Layers from "./components/Layers";
 import "./styles/index.css";
+import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
 
 import WaveJSON from "./components/waves.json";
 
 function Main() {
   const [CurrentActiveLayer, SetActiveLayer] = useState(null);
   const [VariableChanged, SetVariableChanged] = useState(false);
+  const [LayerLevels, SetLayerLevels] = useState(2);
+  const [AlertShown, SetAlert] = useState(false);
 
   const InputEnable = CurrentActiveLayer === null ? true : false;
 
-  let layerlevels = 3;
   let LayerGroup = [];
 
   function recalculate(type) {
     if (type) {
-      for (let i = 0; i < layerlevels; i++) {
+      for (let i = 0; i < LayerLevels; i++) {
         SvgDrawing(i + 1, WaveJSON[0].SvgWave[i]);
       }
     } else {
@@ -32,8 +35,8 @@ function Main() {
     }
   }
 
-  for (let i = 0; i < layerlevels; i++) {
-    if (WaveJSON[0].SvgWave.length < layerlevels) {
+  for (let i = 0; i < LayerLevels; i++) {
+    if (WaveJSON[0].SvgWave.length < LayerLevels) {
       SvgDrawing(WaveJSON[0].SvgWave.length + 1);
     }
 
@@ -44,6 +47,7 @@ function Main() {
         StrokeColor={WaveJSON[0].SvgWave[i].StrokeColor}
         LayerSelected={LayerSelected}
         ActiveLayer={CurrentActiveLayer}
+        Alert={AlertShown}
         Visibility={Number(CurrentActiveLayer) === i + 1 ? "hidden" : "visible"}
         handleChange={handleChange}
       />
@@ -109,8 +113,16 @@ function Main() {
         SetVariableChanged(!VariableChanged);
         break;
       case "Direction":
-        WaveJ[Number(CurrentActiveLayer) - 1].Direction = n === 1 ? "spin" : "spinBack";
+        WaveJ[Number(CurrentActiveLayer) - 1].Direction =
+          n === 1 ? "spin" : "spinBack";
         SetVariableChanged(!VariableChanged);
+        break;
+      case "AddLayer":
+        if (LayerLevels < 7) {
+          SetLayerLevels(LayerLevels + 1);
+        } else {
+          SetAlert(true);
+        }
         break;
       default:
         break;
@@ -134,6 +146,7 @@ function Main() {
         Radius={WaveJ[i].SetRadius * 10}
         Speed={WaveJ[i].Speed}
         InputEnable={InputEnable}
+        Alert={AlertShown}
         key={CurrentActiveLayer}
       />
     );
@@ -141,11 +154,34 @@ function Main() {
 
   return (
     <div className="main">
+      {AlertShown ? (
+        <Alert
+          className="alert"
+          severity="info"
+          action={
+            <Button
+              color="inherit"
+              size="small"
+              onClick={() => {
+                SetAlert(false);
+              }}
+            >
+              CLOSE
+            </Button>
+          }
+        >
+          Maxmium 7 layers
+        </Alert>
+      ) : null}
       <div className="SVG-cover">
         <div className="SVG">{SvgGroup}</div>
       </div>
       <div className="Side">
-        <SideBar LayerGroup={LayerGroup} />
+        <SideBar
+          LayerGroup={LayerGroup}
+          handleChange={handleChange}
+          Alert={AlertShown}
+        />
       </div>
       <div className="Bottom">
         {BottomBarGroup[Number(CurrentActiveLayer) - 1] ? (

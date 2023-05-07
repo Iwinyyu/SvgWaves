@@ -38,7 +38,6 @@ export default function Layer(props) {
 
   const handleChangeComplete = (color) => {
     SetCurrentColor(color.rgb);
-    console.log(color.rgb)
     props.handleChange("Color", color.rgb);
   };
 
@@ -55,7 +54,6 @@ export default function Layer(props) {
         onClick={() => SetDisplayColorpicker(true)}
       >
         <div className="color-square" style={ColorStyles.ChangeColor}></div>
-        {/* <span className="color-name">{CurrentColor}</span> */}
       </button>
       {DisplayColorPicker ? (
         <>

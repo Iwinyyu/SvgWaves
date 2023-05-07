@@ -119,3 +119,8 @@ h1 {
   height: 100%;
   color: var(--Element-secondary-theme);
 }
+.Direction-Icon:active {
+  width: 100%;
+  height: 100%;
+  color: var(--Element-hi-light);
+}

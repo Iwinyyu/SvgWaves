@@ -32,6 +32,16 @@
   place-content: center;
   margin: 0 10px;
 }
+.alert {
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  width: 20rem;
+  z-index: 10;
+  position: fixed;
+  left: 350px;
+  top: 30px;
+}
 
 /* @media (prefers-reduced-motion: no-preference) {
   .visual-path {

@@ -26,7 +26,7 @@ export default function BottomBar(props) {
                 value={Width}
                 onChange={(event) => SetWidth(event.target.value)}
                 onBlur={(event) => handleChange("Size", event.target.value)}
-                disabled={props.InputEnable}
+                disabled={props.Alert}
               ></input>
               <span>px</span>
             </div>
@@ -42,7 +42,7 @@ export default function BottomBar(props) {
                 onBlur={(event) =>
                   handleChange("StrokeWidth", event.target.value)
                 }
-                disabled={props.InputEnable}
+                disabled={props.Alert}
               ></input>
               <span>px</span>
             </div>
@@ -63,7 +63,7 @@ export default function BottomBar(props) {
               SetComplexity(event.target.value);
               handleChange("Complexity", event.target.value);
             }}
-            disabled={props.InputEnable}
+            disabled={props.Alert}
           ></input>
         </div>
 
@@ -79,7 +79,7 @@ export default function BottomBar(props) {
               SetSegments(event.target.value);
               handleChange("Segments", event.target.value);
             }}
-            disabled={props.InputEnable}
+            disabled={props.Alert}
           ></input>
         </div>
 
@@ -95,7 +95,7 @@ export default function BottomBar(props) {
               SetRadius(event.target.value);
               handleChange("Radius", event.target.value);
             }}
-            disabled={props.InputEnable}
+            disabled={props.Alert}
           ></input>
         </div>
       </div>
@@ -113,16 +113,28 @@ export default function BottomBar(props) {
               SetSpeed(event.target.value);
               handleChange("Speed", event.target.value);
             }}
-            disabled={props.InputEnable}
+            disabled={props.Alert}
           ></input>
         </div>
         <div className="Rotation">
           <span className="R-Speed">Direction</span>
           <div className="Direction-Buttons">
-            <button className="Direction-Button Left" onClick={() => {handleChange("Direction", 0)}}>
+            <button
+              className="Direction-Button Left"
+              onClick={() => {
+                handleChange("Direction", 0);
+              }}
+              disabled={props.Alert}
+            >
               <BsFillArrowLeftSquareFill className="Direction-Icon Left" />
             </button>
-            <button className="Direction-Button Right" onClick={() => {handleChange("Direction", 1)}}>
+            <button
+              className="Direction-Button Right"
+              onClick={() => {
+                handleChange("Direction", 1);
+              }}
+              disabled={props.Alert}
+            >
               <BsFillArrowRightSquareFill className="Direction-Icon right" />
             </button>
           </div>
