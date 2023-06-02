@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "../styles/SideBar.css";
 
-import { AiFillSetting } from "react-icons/ai";
 import { MdMoreVert } from "react-icons/md";
 import { MdAddCircleOutline, MdDownload } from "react-icons/md";
 
 export default function SideBar(props) {
-  const [checked, setChecked] = useState(true);
   const handleChange = (type, n) => {
     props.handleChange(type, n);
   };
@@ -33,27 +31,21 @@ export default function SideBar(props) {
         <button
           className="AddLayerBtn"
           onClick={() => handleChange("AddLayer", 1)}
-          disabled={props.Alert}
+          disabled={props.Disabled}
         >
           Add Layer
           <MdAddCircleOutline className="AddLayerIcon" />
         </button>
-        <button className="DownloadBtn" disabled={props.Alert}>
+        <button
+          className="DownloadBtn"
+          onClick={() => {
+            handleChange("Download", 1);
+          }}
+          disabled={props.Disabled}
+        >
           Download
           <MdDownload className="DownloadIcon" />
         </button>
-      </div>
-      <div className="ACG">
-        <input
-          className="ACG-btn"
-          type="checkbox"
-          checked={checked}
-          onChange={() => setChecked(!checked)}
-        ></input>
-        <span className="ACG-title">AUTO COLORING</span>
-        <div className="Setting-icon">
-          <AiFillSetting />
-        </div>
       </div>
     </div>
   );

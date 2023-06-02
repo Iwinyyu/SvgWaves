@@ -7,12 +7,12 @@ export default function SvgDrawing(OrderNumber, WaveJson) {
 
   const PathColor = {
     color: {
-      r: '241',
-      g: '112',
-      b: '19',
-      a: '1',
-    }
-  }
+      r: "241",
+      g: "112",
+      b: "19",
+      a: "1",
+    },
+  };
   // esentials of the img
   let SVG_W = SvgExist ? WaveJson.CanvasWidth : 600;
   let SVG_H = SvgExist ? WaveJson.CanvasWidth : 600;
@@ -22,7 +22,7 @@ export default function SvgDrawing(OrderNumber, WaveJson) {
   let StrokeColor = SvgExist ? WaveJson.StrokeColor : PathColor.color;
   let StrokeWidth = SvgExist ? WaveJson.StrokeWidth : 20;
   let Complexity = SvgExist ? WaveJson.Complexity : 0.5;
-  let CanvasSize = Math.min(SVG_H, SVG_W) / 2;
+  let CanvasSize = Math.min(SVG_H, SVG_W) / 2 - 60;
   let setradius = SvgExist ? WaveJson.SetRadius : 0.4;
   let Radius = CanvasSize * setradius;
   let TotalSegments = SvgExist ? WaveJson.Segments : 10;
@@ -30,6 +30,7 @@ export default function SvgDrawing(OrderNumber, WaveJson) {
   let RootSvg;
   let Speed = SvgExist ? WaveJson.Speed : 0;
   let Direction = SvgExist ? WaveJson.Direction : "spin";
+  let Visibility = SvgExist ? WaveJson.Visibility : "visible";
 
   // Segments for identifing each connection points
   const Segments = [];
@@ -63,11 +64,11 @@ export default function SvgDrawing(OrderNumber, WaveJson) {
     let nextY = Segments[nextControlPoint].props.y;
     //
     let randomMin =
-      ((180 - Angle) / 1) * Complexity * -1 -
+      ((180 - Angle)) * Complexity * -1 -
       (90 - (180 - Angle) / 2) -
       i * Angle;
     let randomMax =
-      ((180 - Angle) / 1) * Complexity - (90 - (180 - Angle) / 2) - i * Angle;
+      ((180 - Angle)) * Complexity - (90 - (180 - Angle) / 2) - i * Angle;
     let innerAngle = get_Random(randomMin, randomMax) * -1;
     let bottomLine = Math.cos((((180 - Angle) / 2) * Math.PI) / 180) * Radius;
     let waveRadius = get_Random(bottomLine / 2, bottomLine);
@@ -149,6 +150,7 @@ export default function SvgDrawing(OrderNumber, WaveJson) {
       Segments: TotalSegments,
       Speed: Speed,
       Direction: Direction,
+      Visibility: Visibility,
 
       TranslateWidth: SVG_trans_W,
       TranslateHeight: SVG_trans_H,
@@ -167,6 +169,7 @@ export default function SvgDrawing(OrderNumber, WaveJson) {
       Segments: TotalSegments,
       Speed: Speed,
       Direction: Direction,
+      Visibility: Visibility,
 
       TranslateWidth: SVG_trans_W,
       TranslateHeight: SVG_trans_H,

@@ -13,9 +13,12 @@ export default function SvgGenerator(props) {
   });
 
   return (
+    
     <svg
       className="visual"
       viewBox={`0 0 ${props.SVG_W} ${props.SVG_H}`}
+      strokeLinecap="round"
+      strokeLinejoin="round"
       width={`${props.SVG_W}`}
       height={`${props.SVG_H}`}
       xmlns="http://www.w3.org/2000/svg"
@@ -23,12 +26,13 @@ export default function SvgGenerator(props) {
       <g transform={`translate(${props.SVG_trans_W} ${props.SVG_trans_H})`}>
         {
           <path
-            className={`visualpath`}
+            className={`visualpath Layer${props.Order}`}
             style={style.visualpath}
             d={`${props.rootSvg}`}
             fill={`${props.fill}`}
             stroke={`rgba(${props.color.r},${props.color.g},${props.color.b},${props.color.a})`}
             strokeWidth={`${props.width}`}
+            visibility={`${props.Visibility}`}
           ></path>
         }
       </g>

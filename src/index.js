@@ -10,20 +10,40 @@ import "./styles/index.css";
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 
+import Download from "./functions/Download";
+
 import WaveJSON from "./components/waves.json";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { MdClose, MdDownload } from "react-icons/md";
+
+const theme = createTheme({
+  status: {
+    danger: "#e53e3e",
+  },
+  palette: {
+    primary: {
+      main: "rgba(255,255,255,1)",
+      darker: "#053e85",
+    },
+    neutral: {
+      main: "rgba(255,255,255,1)",
+      contrastText: "rgba(0,0,0,1)",
+    },
+  },
+});
 
 function Main() {
   const [CurrentActiveLayer, SetActiveLayer] = useState(null);
   const [VariableChanged, SetVariableChanged] = useState(false);
-  const [LayerLevels, SetLayerLevels] = useState(2);
+  const [LayerLevels, SetLayerLevels] = useState(1);
   const [AlertShown, SetAlert] = useState(false);
-
-  const InputEnable = CurrentActiveLayer === null ? true : false;
+  const [DownloadShown, SetDownload] = useState(false);
+  let FunctionDisabled = AlertShown || DownloadShown;
 
   let LayerGroup = [];
 
   function recalculate(type) {
-    if (type) {
+    if (type === "Size") {
       for (let i = 0; i < LayerLevels; i++) {
         SvgDrawing(i + 1, WaveJSON[0].SvgWave[i]);
       }
@@ -34,20 +54,25 @@ function Main() {
       );
     }
   }
+  function reorder(n) {
+    for (let i = 0; i < LayerLevels - n; i++) {
+      WaveJSON[0].SvgWave[i].Order = i + 1;
+    }
+  }
 
   for (let i = 0; i < LayerLevels; i++) {
     if (WaveJSON[0].SvgWave.length < LayerLevels) {
       SvgDrawing(WaveJSON[0].SvgWave.length + 1);
     }
-
     LayerGroup.push(
       <Layers
-        key={`layer ${i}`}
+        key={`layer${i}`}
         Order={WaveJSON[0].SvgWave[i].Order}
         StrokeColor={WaveJSON[0].SvgWave[i].StrokeColor}
         LayerSelected={LayerSelected}
         ActiveLayer={CurrentActiveLayer}
-        Alert={AlertShown}
+        Disabled={FunctionDisabled}
+        SvgVisibility={WaveJSON[0].SvgWave[i].Visibility}
         Visibility={Number(CurrentActiveLayer) === i + 1 ? "hidden" : "visible"}
         handleChange={handleChange}
       />
@@ -72,6 +97,7 @@ function Main() {
         width={WaveJ[i].StrokeWidth}
         Speed={WaveJ[i].Speed}
         Direction={WaveJ[i].Direction}
+        Visibility={WaveJ[i].Visibility}
       />
     );
   }
@@ -86,7 +112,8 @@ function Main() {
         }
         break;
       case "Complexity":
-        WaveJ[Number(CurrentActiveLayer) - 1].Complicity = n / 10;
+        WaveJ[Number(CurrentActiveLayer) - 1].Complexity = n / 10;
+        console.log(n / 10);
         recalculate();
         SetVariableChanged(!VariableChanged);
         break;
@@ -124,6 +151,34 @@ function Main() {
           SetAlert(true);
         }
         break;
+      case "DelLayer":
+        WaveJ.splice(n - 1, 1);
+        reorder(1);
+        SetActiveLayer(null);
+        SetLayerLevels(LayerLevels - 1);
+        break;
+      case "Reload":
+        recalculate();
+        SetVariableChanged(!VariableChanged);
+        break;
+      case "Visibility":
+        WaveJ[Number(CurrentActiveLayer) - 1].Visibility =
+          WaveJ[Number(CurrentActiveLayer) - 1].Visibility === "visible"
+            ? "hidden"
+            : "visible";
+        SetVariableChanged(!VariableChanged);
+        break;
+      case "Download":
+        SetDownload(true);
+        SetVariableChanged(!VariableChanged);
+        break;
+      case "DownloadSVG":
+        Download("SVG", LayerLevels);
+        break;
+      case "DownloadPNG":
+        Download("PNG", LayerLevels);
+
+        break;
       default:
         break;
     }
@@ -145,9 +200,8 @@ function Main() {
         Complexity={WaveJ[i].Complexity * 10}
         Radius={WaveJ[i].SetRadius * 10}
         Speed={WaveJ[i].Speed}
-        InputEnable={InputEnable}
-        Alert={AlertShown}
-        key={CurrentActiveLayer}
+        Disabled={FunctionDisabled}
+        key={i}
       />
     );
   }
@@ -173,6 +227,49 @@ function Main() {
           Maxmium 7 layers
         </Alert>
       ) : null}
+      {DownloadShown ? (
+        <div className="DownloadOptions">
+          <div className="DownloadTopbar">
+            <h2 className="DownloadTitle">DOWNLOAD OPTIONS</h2>
+            <button
+              className="CloseDownload"
+              onClick={() => SetDownload(false)}
+            >
+              <MdClose color="white" size="2em" />
+            </button>
+          </div>
+          <div className="Options">
+            <ThemeProvider theme={theme}>
+              <Button
+                className="DownloadSVGBtn"
+                variant="contained"
+                color="neutral"
+                sx={{
+                  width: 100,
+                }}
+                onClick={() => handleChange("DownloadSVG", 1)}
+              >
+                SVG
+                <MdDownload />
+              </Button>
+            </ThemeProvider>
+            <ThemeProvider theme={theme}>
+              <Button
+                className="DownloadPNGBtn"
+                variant="contained"
+                color="neutral"
+                sx={{
+                  width: 100,
+                }}
+                onClick={() => handleChange("DownloadPNG", 1)}
+              >
+                PNG
+                <MdDownload />
+              </Button>
+            </ThemeProvider>
+          </div>
+        </div>
+      ) : null}
       <div className="SVG-cover">
         <div className="SVG">{SvgGroup}</div>
       </div>
@@ -180,14 +277,16 @@ function Main() {
         <SideBar
           LayerGroup={LayerGroup}
           handleChange={handleChange}
-          Alert={AlertShown}
+          Disabled={FunctionDisabled}
         />
       </div>
       <div className="Bottom">
-        {BottomBarGroup[Number(CurrentActiveLayer) - 1] ? (
+        {CurrentActiveLayer ? (
           BottomBarGroup[Number(CurrentActiveLayer) - 1]
         ) : (
-          <h1 className="Filling-Text">Please select a layer</h1>
+          <div className="Bottom-Bar">
+            <h1 className="Filling-Text">Please select a layer</h1>
+          </div>
         )}
       </div>
     </div>

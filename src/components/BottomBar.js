@@ -26,7 +26,7 @@ export default function BottomBar(props) {
                 value={Width}
                 onChange={(event) => SetWidth(event.target.value)}
                 onBlur={(event) => handleChange("Size", event.target.value)}
-                disabled={props.Alert}
+                disabled={props.Disabled}
               ></input>
               <span>px</span>
             </div>
@@ -42,7 +42,7 @@ export default function BottomBar(props) {
                 onBlur={(event) =>
                   handleChange("StrokeWidth", event.target.value)
                 }
-                disabled={props.Alert}
+                disabled={props.Disabled}
               ></input>
               <span>px</span>
             </div>
@@ -63,12 +63,12 @@ export default function BottomBar(props) {
               SetComplexity(event.target.value);
               handleChange("Complexity", event.target.value);
             }}
-            disabled={props.Alert}
+            disabled={props.Disabled}
           ></input>
         </div>
 
         <div className="Variables">
-          <span className="V-Segments">Segments</span>
+          <span className="V-Segments">Waves</span>
           <input
             className="Variable-Input"
             type="range"
@@ -79,7 +79,7 @@ export default function BottomBar(props) {
               SetSegments(event.target.value);
               handleChange("Segments", event.target.value);
             }}
-            disabled={props.Alert}
+            disabled={props.Disabled}
           ></input>
         </div>
 
@@ -95,7 +95,7 @@ export default function BottomBar(props) {
               SetRadius(event.target.value);
               handleChange("Radius", event.target.value);
             }}
-            disabled={props.Alert}
+            disabled={props.Disabled}
           ></input>
         </div>
       </div>
@@ -113,7 +113,7 @@ export default function BottomBar(props) {
               SetSpeed(event.target.value);
               handleChange("Speed", event.target.value);
             }}
-            disabled={props.Alert}
+            disabled={props.Disabled}
           ></input>
         </div>
         <div className="Rotation">
@@ -124,7 +124,7 @@ export default function BottomBar(props) {
               onClick={() => {
                 handleChange("Direction", 0);
               }}
-              disabled={props.Alert}
+              disabled={props.Disabled}
             >
               <BsFillArrowLeftSquareFill className="Direction-Icon Left" />
             </button>
@@ -133,7 +133,7 @@ export default function BottomBar(props) {
               onClick={() => {
                 handleChange("Direction", 1);
               }}
-              disabled={props.Alert}
+              disabled={props.Disabled}
             >
               <BsFillArrowRightSquareFill className="Direction-Icon right" />
             </button>

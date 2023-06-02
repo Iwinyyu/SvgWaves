@@ -124,3 +124,52 @@ h1 {
   height: 100%;
   color: var(--Element-hi-light);
 }
+
+@media only screen and (max-width: 80rem) {
+  .Canvas-W-H {
+    width: fit-content;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .W-size,
+  .strokeWidth,
+  .segments {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
+    gap: 10px;
+  }
+}
+@media only screen and (max-width: 50rem) {
+  .Variables {
+    font-size: 1rem;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    width: fit-content;
+    color: var(--Element-main-theme);
+    font-weight: 700;
+    margin-bottom: max(2vh, 1rem);
+    appearance: none;
+  }
+  .Rotation {
+    font-size: 1rem;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    width: fit-content;
+    color: var(--Element-main-theme);
+    font-weight: 700;
+    margin-bottom: max(2vh, 1rem);
+    appearance: none;
+  }
+}

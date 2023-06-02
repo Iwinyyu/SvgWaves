@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import reactCSS from "reactcss";
 
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdSettingsEthernet } from "react-icons/md";
 import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { AiOutlineReload } from "react-icons/ai";
@@ -10,12 +10,13 @@ import { ChromePicker } from "react-color";
 import "../styles/Layers.css";
 
 export default function Layer(props) {
-  const [CurrentColor, SetCurrentColor] = useState(props.StrokeColor);
+  const CurrentColor = props.StrokeColor;
   const [DisplayColorPicker, SetDisplayColorpicker] = useState(false);
+  const [MoreShown, SetMoreShown] = useState(false);
   const ColorStyles = reactCSS({
     default: {
       ChangeColor: {
-        minWidth: "7rem",
+        minWidth: "100%",
         minHeight: "1rem",
 
         background: `rgba(${CurrentColor.r},${CurrentColor.g},${CurrentColor.b},${CurrentColor.a})`,
@@ -37,12 +38,19 @@ export default function Layer(props) {
       : "Layer-container";
 
   const handleChangeComplete = (color) => {
-    SetCurrentColor(color.rgb);
     props.handleChange("Color", color.rgb);
   };
 
   const LayerSelected = () => {
-    props.LayerSelected(props.Order);
+    if (props.Disabled === false) {
+      if (props.ActiveLayer !== props.Order) {
+        props.LayerSelected(props.Order);
+      }
+    }
+  };
+
+  const handleChange = (type, n) => {
+    props.handleChange(type, n);
   };
 
   return (
@@ -71,15 +79,92 @@ export default function Layer(props) {
         </>
       ) : null}
       <div className="layer-buttons">
-        <button className="layer-button">
-          <AiOutlineReload color="white" className="layer-icon layer-random" />
+        <button className="layer-buttonShow">
+          <AiOutlineReload
+            className="layer-icon layer-random"
+            onClick={() => {
+              handleChange("Reload", 0);
+            }}
+          />
         </button>
-        <button className="layer-button">
-          <AiFillEye color="white" className="layer-icon layer-visibility" />
+        <button className="layer-buttonShow">
+          {props.SvgVisibility === "visible" ? (
+            <AiFillEye
+              className="layer-icon layer-visibility"
+              onClick={() => {
+                props.handleChange("Visibility", 0);
+              }}
+            />
+          ) : (
+            <AiFillEyeInvisible
+              className="layer-icon layer-visibility"
+              onClick={() => {
+                handleChange("Visibility", 0);
+              }}
+            />
+          )}
         </button>
-        <button className="layer-button">
-          <MdDelete color="white" className="layer-icon layer-delete" />
+        <button className="layer-buttonShow">
+          <MdDelete
+            className="layer-icon layer-delete"
+            onClick={() => {
+              handleChange("DelLayer", props.Order);
+            }}
+          />
         </button>
+        <button className="layer-more">
+          <MdSettingsEthernet
+            className="layer-icon"
+            onClick={() => {
+              SetMoreShown(true);
+            }}
+          />
+        </button>
+        {MoreShown ? (
+          <>
+            <div
+              className="cover"
+              onClick={() => {
+                SetMoreShown(false);
+              }}
+            ></div>
+            <div className="DefaultSizeBtns">
+              <button className="layer-button">
+                <AiOutlineReload
+                  className="layer-icon layer-random"
+                  onClick={() => {
+                    handleChange("Reload", 0);
+                  }}
+                />
+              </button>
+              <button className="layer-button">
+                {props.SvgVisibility === "visible" ? (
+                  <AiFillEye
+                    className="layer-icon layer-visibility"
+                    onClick={() => {
+                      props.handleChange("Visibility", 0);
+                    }}
+                  />
+                ) : (
+                  <AiFillEyeInvisible
+                    className="layer-icon layer-visibility"
+                    onClick={() => {
+                      handleChange("Visibility", 0);
+                    }}
+                  />
+                )}
+              </button>
+              <button className="layer-button">
+                <MdDelete
+                  className="layer-icon layer-delete"
+                  onClick={() => {
+                    handleChange("DelLayer", props.Order);
+                  }}
+                />
+              </button>
+            </div>
+          </>
+        ) : null}
       </div>
     </div>
   );

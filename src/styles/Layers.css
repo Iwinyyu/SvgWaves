@@ -1,5 +1,6 @@
 .Layer-container {
   display: flex;
+  justify-content: space-around;
   align-items: center;
   gap: 1rem;
   margin-bottom: 7px;
@@ -26,14 +27,9 @@
   position: fixed;
   translate: -110% 50%;
 }
-.color-name {
-  width: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .layer-color {
   width: 50%;
+  min-width: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -44,11 +40,13 @@
   font-size: 1rem;
 }
 
+
 .layer-buttons {
   display: flex;
-  gap: 8px;
+  gap: 13px;
 }
 .layer-button {
+  color: var(--Element-main-theme);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,7 +55,80 @@
   width: 1rem;
   height: 1rem;
 }
+.layer-buttonShow {
+  color: var(--Element-main-theme);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+}
+.layer-more{
+  color: var(--Element-main-theme);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  visibility: hidden;
+}
 .layer-icon {
   height: 100%;
   width: 100%;
+}
+.DefaultSizeBtns{
+  display: flex;
+  visibility: hidden;
+  position: absolute;
+  gap: 13px;
+}
+.layer-button:active{
+  color: var(--Element-secondary-theme);
+}
+
+@media only screen and (max-width: 75rem){
+  .layer-buttonShow {
+    color: var(--Element-main-theme);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    cursor: pointer;
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    visibility: hidden;
+  }
+  .layer-more{
+    color: var(--Element-main-theme);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 1rem;
+    height: 1rem;
+    position: static;
+    visibility: visible;
+  }
+  .DefaultSizeBtns{
+    z-index: 4;
+    border-radius: 10px;
+    padding: 7px;
+    flex-direction: column;
+    position: absolute;
+    visibility: visible;
+    top: 140%;
+    right: 50%;
+    background-color: var(--Element-hi-light);
+  }
+  .layer-buttons{
+    flex-direction: column;
+    place-items: center;
+    position: relative;
+  }
 }
