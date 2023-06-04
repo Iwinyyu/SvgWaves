@@ -140,8 +140,7 @@ h1 {
   .segments {
     display: flex;
     flex-direction: column;
-    align-items: start;
-    justify-content: end;
+    align-items: flex-start;
     gap: 10px;
   }
 }
@@ -151,7 +150,7 @@ h1 {
     gap: 10px;
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-between;
     width: fit-content;
     color: var(--Element-main-theme);
@@ -159,12 +158,13 @@ h1 {
     margin-bottom: max(2vh, 1rem);
     appearance: none;
   }
+  
   .Rotation {
     font-size: 1rem;
     gap: 10px;
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-between;
     width: fit-content;
     color: var(--Element-main-theme);
