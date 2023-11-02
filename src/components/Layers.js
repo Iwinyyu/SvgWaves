@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,Fragment } from "react";
 import reactCSS from "reactcss";
 
 import { MdDelete, MdSettingsEthernet } from "react-icons/md";
@@ -8,6 +8,7 @@ import { AiOutlineReload } from "react-icons/ai";
 import { ChromePicker } from "react-color";
 
 import "../styles/Layers.css";
+import Segment from "./Segments";
 
 export default function Layer(props) {
   const CurrentColor = props.StrokeColor;
@@ -64,7 +65,7 @@ export default function Layer(props) {
         <div className="color-square" style={ColorStyles.ChangeColor}></div>
       </button>
       {DisplayColorPicker ? (
-        <>
+        <Fragment>
           <div
             className="cover"
             onClick={() => {
@@ -76,7 +77,7 @@ export default function Layer(props) {
             color={CurrentColor}
             onChange={(color) => handleChangeComplete(color)}
           />
-        </>
+        </Fragment>
       ) : null}
       <div className="layer-buttons">
         <button className="layer-buttonShow">

@@ -4,11 +4,13 @@ import { Buffer } from "buffer";
 
 export default function Download(type, LayerLevels) {
   let WaveJ = WaveJSON[0].SvgWave;
+  let backColor = WaveJSON[0].SvgFactor[0].bgColor
+
   const Path = document.querySelectorAll(".visualpath");
   const InitialSvg =
     LayerLevels === 0
       ? null
-      : `<svg class="visual" viewBox="0 0 ${WaveJ[0].CanvasWidth} ${WaveJ[0].CanvasWidth}" width="${WaveJ[0].CanvasWidth}" height="${WaveJ[0].CanvasWidth}" xmlns="http://www.w3.org/2000/svg"><g transform="translate(${WaveJ[0].TranslateWidth} ${WaveJ[0].TranslateWidth})">`;
+      : `<svg class="visual" viewBox="0 0 ${WaveJ[0].CanvasWidth} ${WaveJ[0].CanvasWidth}" width="${WaveJ[0].CanvasWidth}" height="${WaveJ[0].CanvasWidth}" xmlns="http://www.w3.org/2000/svg">  <rect xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill='rgba(${backColor.r},${backColor.g},${backColor.b},${backColor.a})'/> <g transform="translate(${WaveJ[0].TranslateWidth} ${WaveJ[0].TranslateWidth})">`;
   const PathArray = [];
   Path.forEach((e) => {
     PathArray.push(e.outerHTML);

@@ -16,6 +16,10 @@ import WaveJSON from "./components/waves.json";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { MdClose, MdDownload } from "react-icons/md";
 
+import reactCSS from "reactcss";
+
+
+
 const theme = createTheme({
   status: {
     danger: "#e53e3e",
@@ -39,6 +43,17 @@ function Main() {
   const [AlertShown, SetAlert] = useState(false);
   const [DownloadShown, SetDownload] = useState(false);
   let FunctionDisabled = AlertShown || DownloadShown;
+
+  let backColor = WaveJSON[0].SvgFactor[0].bgColor
+
+  const Colors = reactCSS({
+    default: {
+      ChangeColor: {
+
+        background: `rgba(${backColor.r},${backColor.g},${backColor.b},${backColor.a})`,
+      },
+    },
+  });
 
   let LayerGroup = [];
 
@@ -133,6 +148,10 @@ function Main() {
         break;
       case "Color":
         WaveJ[Number(CurrentActiveLayer) - 1].StrokeColor = n;
+        SetVariableChanged(!VariableChanged);
+        break;
+        case "bgColor":
+          WaveJSON[0].SvgFactor[0].bgColor = n;
         SetVariableChanged(!VariableChanged);
         break;
       case "Speed":
@@ -271,13 +290,15 @@ function Main() {
         </div>
       ) : null}
       <div className="SVG-cover">
-        <div className="SVG">{SvgGroup}</div>
+        <div className="SVG" style={Colors.ChangeColor}>{SvgGroup}</div>
       </div>
       <div className="Side">
         <SideBar
           LayerGroup={LayerGroup}
           handleChange={handleChange}
           Disabled={FunctionDisabled}
+          Visibility={"hidden"}
+          bgColor={WaveJSON[0].SvgFactor[0].bgColor}
         />
       </div>
       <div className="Bottom">

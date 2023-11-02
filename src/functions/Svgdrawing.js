@@ -6,12 +6,18 @@ export default function SvgDrawing(OrderNumber, WaveJson) {
   const SvgExist = WaveJson ? true : false;
 
   const PathColor = {
-    color: {
+    pathcolor: {
       r: "241",
       g: "112",
       b: "19",
       a: "1",
     },
+    bgcolor: {
+      r: "250",
+      g: "250",
+      b: "200",
+      a: "1",
+    }
   };
   // esentials of the img
   let SVG_W = SvgExist ? WaveJson.CanvasWidth : 600;
@@ -19,7 +25,9 @@ export default function SvgDrawing(OrderNumber, WaveJson) {
   let SVG_trans_W = SVG_W / 2;
   let SVG_trans_H = SVG_H / 2;
   let Fill = SvgExist ? WaveJson.PathFill : "transparent";
-  let StrokeColor = SvgExist ? WaveJson.StrokeColor : PathColor.color;
+  let StrokeColor = SvgExist ? WaveJson.StrokeColor : PathColor.pathcolor;
+  let bgColor = SvgExist ? WaveJson.bgColor : PathColor.bgcolor;
+
   let StrokeWidth = SvgExist ? WaveJson.StrokeWidth : 20;
   let Complexity = SvgExist ? WaveJson.Complexity : 0.5;
   let CanvasSize = Math.min(SVG_H, SVG_W) / 2 - 60;
@@ -157,6 +165,7 @@ export default function SvgDrawing(OrderNumber, WaveJson) {
       PathD: RootSvg,
       PathFill: Fill,
       StrokeColor: StrokeColor,
+      bgColor:bgColor,
       StrokeWidth: StrokeWidth,
     };
   } else {
@@ -176,6 +185,7 @@ export default function SvgDrawing(OrderNumber, WaveJson) {
       PathD: RootSvg,
       PathFill: Fill,
       StrokeColor: StrokeColor,
+      bgColor:bgColor,
       StrokeWidth: StrokeWidth,
     });
   }
