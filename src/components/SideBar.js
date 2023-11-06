@@ -2,7 +2,6 @@ import React, { useState, Fragment } from "react";
 
 import "../styles/SideBar.css";
 
-import { MdMoreVert } from "react-icons/md";
 import { MdAddCircleOutline, MdDownload } from "react-icons/md";
 
 import { ChromePicker } from "react-color";

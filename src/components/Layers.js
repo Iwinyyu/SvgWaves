@@ -8,7 +8,6 @@ import { AiOutlineReload } from "react-icons/ai";
 import { ChromePicker } from "react-color";
 
 import "../styles/Layers.css";
-import Segment from "./Segments";
 
 export default function Layer(props) {
   const CurrentColor = props.StrokeColor;
