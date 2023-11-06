@@ -15,8 +15,12 @@ export default function SideBar(props) {
   const ColorStyles = reactCSS({
     default: {
       ChangeColor: {
-        minWidth: "1rem",
-        minHeight: "1rem",
+        minWidth: "0.6rem",
+        minHeight: "0.6rem",
+        maxWidth: "1rem",
+        maxHeight: "1rem",
+        width: "3vw",
+        height: "3vw",
 
         background: `rgba(${CurrentColor.r},${CurrentColor.g},${CurrentColor.b},${CurrentColor.a})`,
       },

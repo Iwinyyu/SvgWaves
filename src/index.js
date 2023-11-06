@@ -297,7 +297,6 @@ function Main() {
           LayerGroup={LayerGroup}
           handleChange={handleChange}
           Disabled={FunctionDisabled}
-          Visibility={"hidden"}
           bgColor={WaveJSON[0].SvgFactor[0].bgColor}
         />
       </div>

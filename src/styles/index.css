@@ -1,13 +1,26 @@
 @import url(style.css);
 
+
 .main {
   display: grid;
   width: 100vw;
-  height: 100vh;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
+  height: 100dvh;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  height: -webkit-fill-available;
+  user-select: none;
+
 }
 
+.SVG-cover {
+  grid-row: 1/6;
+  grid-column: 1/5;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  border-bottom-right-radius: 10px;
+  box-shadow: inset -10px -10px 1vw var(--Box-shadow);
+}
 .visual {
   width: 100%;
   height: 100%;
@@ -20,26 +33,28 @@
 }
 .Bottom{
   grid-row: 6/7;
-  grid-column: 1/5;
+  grid-column: 1/6;
   align-self: center;
   justify-self: start;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+}
+.Bottom-Bar {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  color: white;
+  background-color: var(--Main-theme);
 }
 .Side{
   grid-row: 1/6;
-  grid-column: 5/7;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  grid-column: 5/6;
   border-bottom: 2px solid var(--Border);
+  padding: 1rem 0 1rem 0;
 }
-.SVG-cover {
-  grid-row: 1/6;
-  grid-column: 1/5;
-  width: 100%;
-  height: 100%;
-  padding: 1rem;
-  border-bottom-right-radius: 10px;
-  box-shadow: inset -10px -10px 1vw var(--Box-shadow);
-}
+
 .SVG {
   border-radius: 20px;
   height: 100%;
@@ -55,10 +70,10 @@
   display: flex;
   justify-content: center;
   place-items: center;
-  width: 20rem;
+  width: 19rem;
   z-index: 10;
   position: fixed;
-  left: 350px;
+  left: 10dvw;
   top: 30px;
 }
 .DownloadOptions{
@@ -123,31 +138,58 @@
 }
 
 .Filling-Text {
-  margin: 20px;
   color: var(--Element-main-theme);
 }
 
 @media only screen and (max-width: 50rem) {
+  .main {
+    display: grid;
+    width: 100vw;
+    height: 100dvh;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    height: -webkit-fill-available;
+  }
+  
+
   .SVG-cover {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    grid-row: 1/6;
+    grid-column: 1/5;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
     border-bottom-right-radius: 10px;
-    width: 80vw;
-    height: 74vh;
     box-shadow: inset -10px -10px 1vw var(--Box-shadow);
+  }
+
+  .Bottom{
+    grid-row: 6/8;
+    grid-column: 1/6;
+    align-self: center;
+    justify-self: start;
+    height: 100%;
+    width: 100%;
+    padding-left: 1rem;
+  }
+  .Side{
+    grid-row: 1/6;
+    grid-column: 5/6;
+    border-bottom: 2px solid var(--Border);
+    
   }
 
   .SVG {
     border-radius: 20px;
-    height: 65vh;
-    width: max(70vw, 25em);
+    height: 100%;
+    width: 100%;
     background-color: var(--Main-theme);
-    /* background-color: aqua; */
-    display: flex;
-    align-items: center;
-    place-content: center;
-    margin: 0 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+  .Filling-Text{
+    font-size: 18px;
   }
 }
+
 

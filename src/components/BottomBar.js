@@ -16,7 +16,7 @@ export default function BottomBar(props) {
   return (
     <div className="Bottom-Bar">
       <div className="Canvas-Size">
-        <h1 className="Canvas_Title">Canvas</h1>
+        <h1 className="Canvas-Title">Canvas</h1>
         <div className="Canvas-W-H">
           <div className="W-size">
             <span>Size</span>

@@ -22,7 +22,12 @@
   font-family: var(--Main-font);
   border: none;
 }
+html{
+  height: -webkit-fill-available;
+
+}
 body{
   overflow: hidden;
   background-color: rgb(59, 59, 59);
+  height: -webkit-fill-available;
 }
