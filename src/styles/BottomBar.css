@@ -194,6 +194,15 @@ h1 {
     margin-bottom: max(1vh, 0.5rem);
     appearance: none;
   }
+  .Canvas-W-H {
+    width: fit-content;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: max(2vh, 1rem);
+    margin: 0;
+  }
 
   .Rotation {
     font-size: 1rem;
@@ -226,7 +235,7 @@ h1 {
 @media only screen and (max-width: 40rem) {
 
   .Bottom-Bar {
-    padding: 0;
+    padding: 1vh 0 0 0;
     height: 100%;
     width: 100%;
     max-width: 100%;
