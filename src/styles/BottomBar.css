@@ -274,7 +274,7 @@ h1 {
     width: fit-content;
     color: var(--Element-main-theme);
     font-weight: 500;
-    margin-bottom: max(2vh, 1rem);
+    margin-bottom: max(1.5vh, 0.6rem);
   }
   .Rotation{
     font-size: 14px;
